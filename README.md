@@ -3,6 +3,61 @@
 > 基于Vue和ElementUI的后台管理模板
 
 [预览地址](abingoal.com:3000)
+## 项目结构
+
+```
+.
+├── README.md                   // 说明文档
+├── build                       // webpack构建配置
+│   ├── build.js
+│   ├── check-versions.js
+│   ├── dev-client.js
+│   ├── dev-server.js
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   ├── webpack.prod.conf.js
+│   └── webpack.test.conf.js
+├── config                      // 项目配置
+│   ├── dev.env.js
+│   ├── index.js
+│   ├── prod.env.js
+│   └── test.env.js
+├── element-variables.css       // 自定义ElementUI主题变量
+├── index.html                  
+├── package.json
+├── src
+│   ├── App.vue
+│   ├── assets                  // 引用资源
+│   │   └── logo.png
+│   ├── components              // 组件
+│   │   ├── 404.vue
+│   │   ├── Dashboard.vue
+│   │   ├── Login.vue
+│   │   ├── System
+│   │   │   └── Setting.vue
+│   │   └── User
+│   │       └── Profile.vue
+│   ├── main.js
+│   ├── mock                    // 模拟数据
+│   │   ├── api.js
+│   │   ├── data
+│   │   │   └── user.js
+│   │   ├── index.js
+│   │   └── mock.js
+│   └── router                  // 路由器
+│       ├── index.js
+│       ├── system.js
+│       └── user.js
+├── static                      // 静态资源
+│   └── avatar
+│       └── avatar.png
+├── test                        // 测试
+│   ├── e2e
+│   └── unit
+└── theme                       // ElementUI 生成主题
+```
 
 ## 项目构建
 
