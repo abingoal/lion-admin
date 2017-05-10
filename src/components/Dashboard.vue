@@ -103,8 +103,8 @@
 export default {
   data () {
     return {
-      sysName: 'LionAdmin',
-      abbrName: 'LA',
+      sysName: 'SimbaAdmin',
+      abbrName: 'SA',
       userName: 'Admin',
       userAvatar: '',
       collapsed: false
