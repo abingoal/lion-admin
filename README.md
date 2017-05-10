@@ -1,4 +1,4 @@
-# lion-admin
+# simba-admin
 
 > 基于Vue和ElementUI的后台管理模板
 
