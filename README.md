@@ -2,7 +2,7 @@
 
 > 基于Vue和ElementUI的后台管理模板
 
-[预览地址](lionadmin.abingoal.com)
+[预览地址](abingoal.com:3000)
 
 ## 项目构建
 
