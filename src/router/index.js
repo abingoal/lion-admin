@@ -1,16 +1,30 @@
 import Login from '@/components/Login'
+import Main from '@/components/Main'
 import Dashboard from '@/components/Dashboard'
 import NotFound from '@/components/404'
 import userRouter from './user'
 import systemRouter from './system'
+import chartsRouter from './charts'
 
 let commonRouter = [
   {
-    path: '/dashboard',
-    name: '控制面板',
-    iconClass: 'fa fa-dashboard',
+    path: '/',
+    redirect: { path: '/dashboard' },
+    hidden: true
+  },
+  {
+    path: '/',
+    name: '首页',
+    component: Main,
     rootNode: true,
-    component: Dashboard
+    children: [
+      {
+        path: '/dashboard',
+        name: '控制面板',
+        component: Dashboard,
+        iconClass: 'fa fa-dashboard'
+      }
+    ]
   },
   {
     path: '/login',
@@ -32,6 +46,7 @@ let commonRouter = [
 
 let routes = [
   userRouter,
+  chartsRouter,
   systemRouter
 ]
 

@@ -1,277 +1,205 @@
 <template>
-  <el-row class="container">
-    <!--头部菜单-->
-    <el-col :span="24" class="header">
-      <!--logo-->
-      <el-col :span="10" :class="collapsed ? 'logo-collapse' : 'logo'">
-        {{ collapsed ? abbrName : sysName }}
-      </el-col>
-      <!--伸缩菜单图标-->
-      <el-col :span="10">
-        <div class="tools" @click="collapse">
-          <i class="fa fa-align-justify"></i>
-        </div>
-      </el-col>
-      <!--右侧个人设置-->
-      <el-col :span="4" class="userinfo">
-        <el-dropdown trigger="hover">
-          <span class="el-dropdown-link userinfo-inner">
-            <img :src="this.userAvatar" /> {{ this.userName }}
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人资料</el-dropdown-item>
-            <el-dropdown-item>设置</el-dropdown-item>
-            <el-dropdown-item divided @click.native="logout">注销</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-col>
-    </el-col>
-  
-    <!--左侧导航和中间内容-->
-    <el-col :span="24" class="main">
-      <aside :class="collapsed ? 'menu-collapsed' : 'menu-expanded'">
-        <!--导航菜单-->
-        <el-menu :default-active="$route.path" @open="handleOpen" @close="handleClose" @select="handleSelect" unique-opened router v-show="!collapsed">
-          <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-            <el-submenu :index="index + ''" v-if="!item.rootNode">
-              <!--菜单图标-->
-              <template slot="title">
-                <i :class="item.iconClass"></i>
-                {{ item.name }}
-              </template>
-              <!--子菜单-->
-              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">
-                {{ child.name }}
-              </el-menu-item>
-            </el-submenu>
-  
-            <el-menu-item v-if="item.rootNode" :index="item.path">
-              <i :class="item.iconClass"></i>
-              {{ item.name }}
-            </el-menu-item>
-          </template>
-        </el-menu>
-  
-        <!--导航菜单-折叠后-->
-        <ul class="el-menu el-menu-vertical-demo collapsed" v-show="collapsed" ref="menuCollapsed">
-          <li v-for="(item,index) in $router.options.routes" v-if="!item.hidden" class="el-submenu item">
-            <template v-if="!item.rootNode">
-              <div class="el-submenu__title" style="padding-left: 20px;" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)">
-                <i :class="item.iconClass"></i>
-              </div>
-              <ul class="el-menu submenu" :class="'submenu-hook-'+index" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)">
-                <li v-for="child in item.children" v-if="!child.hidden" :key="child.path" class="el-menu-item" style="padding-left: 40px;" :class="$route.path===child.path?'is-active':''" @click="$router.push(child.path)">
-                  {{child.name}}
-                </li>
-              </ul>
-            </template>
-            <template v-else>
-              <li class="el-submenu">
-                <div class="el-submenu__title el-menu-item" style="padding-left: 20px;height: 56px;line-height: 56px;padding: 0 20px;" :class="$route.path===item.path?'is-active':''" @click="$router.push(item.path)">
-                  <i :class="item.iconClass"></i>
+    <section>
+        <el-row :gutter="20" class="dash-infobox">
+            <el-col :span="6">
+                <div class="grid-content bg-success">
+                    <div class="inner">
+                        <h3>标题</h3>
+                        <p>内容内容内容内容内容</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-coffee"></i>
+                    </div>
+                    <a href="#" class="footer">
+                        查看更多
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
                 </div>
-              </li>
-            </template>
-          </li>
-        </ul>
-      </aside>
-      <section class="content-container">
-        <div class="grid-content bg-purple-light">
-          <el-col :span="24" class="breadcrumb-container">
-            <!--页面标题-->
-            <strong class="title">{{$route.name}}</strong>
-            <!--面包屑导航-->
-            <el-breadcrumb separator="/" class="breadcrumb-inner">
-              <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-                {{ item.name }}
-              </el-breadcrumb-item>
-            </el-breadcrumb>
-          </el-col>
-          <el-col :span="24" class="content-wrapper">
-            <!--主内容页面导航-->
-            <transition name="fade" mode="out-in">
-              <router-view></router-view>
-            </transition>
-          </el-col>
-        </div>
-      </section>
-    </el-col>
-  </el-row>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-warning">
+                    <div class="inner">
+                        <h3>标题</h3>
+                        <p>内容内容内容内容内容</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cutlery"></i>
+                    </div>
+                    <a href="#" class="footer">
+                        查看更多
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-danger">
+                    <div class="inner">
+                        <h3>标题</h3>
+                        <p>内容内容内容内容内容</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-flask"></i>
+                    </div>
+                    <a href="#" class="footer">
+                        查看更多
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-info">
+                    <div class="inner">
+                        <h3>标题</h3>
+                        <p>内容内容内容内容内容</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-legal"></i>
+                    </div>
+                    <a href="#" class="footer">
+                        查看更多
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20" class="dash-chart">
+            <el-col :span="12">
+                <el-card class="box-card">
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'占坑 ' + o }}
+                    </div>
+                </el-card>
+            </el-col>
+            <el-col :span="12">
+                <el-card class="box-card">
+                    <div v-for="o in 4" :key="o" class="text item">
+                        {{'列表内容 ' + o }}
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20" class="dash-card">
+            <el-col :span="6" v-for="(o, index) in 4" :key="o">
+                <el-card :body-style="{ padding: '0px' }">
+                    <img src="http://element.eleme.io/static/hamburger.50e4091.png" class="image">
+                    <div style="padding: 14px;">
+                        <span>好吃的汉堡</span>
+                        <div class="bottom clearfix">
+                            <time class="time">{{ currentDate }}</time>
+                            <el-button type="text" class="button">操作按钮</el-button>
+                        </div>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+    </section>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      sysName: 'SimbaAdmin',
-      abbrName: 'SA',
-      userName: 'Admin',
-      userAvatar: '',
-      collapsed: false
+    export default{
+      data () {
+        return {
+          currentDate: '2017-05-11 12:00'
+        }
+      },
+      mounted () {
+      }
     }
-  },
-  methods: {
-    handleSelect (key, keyPath) {
-      // console.log(key, keyPath)
-    },
-    handleOpen (key, keyPath) {
-      // console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      // console.log(key, keyPath)
-    },
-    collapse () {
-      this.collapsed = !this.collapsed
-    },
-    showMenu (i, status) {
-      this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none'
-    },
-    logout () {
-      const _this = this
-      this.$confirm('确认退出吗?', '提示', {
-        type: 'warning'
-      }).then(() => {
-        sessionStorage.removeItem('user')
-        _this.$router.push('/login')
-      }).catch(() => {
-
-      })
-    }
-  },
-  mounted () {
-    let user = sessionStorage.getItem('user')
-    if (user) {
-      user = JSON.parse(user)
-      this.userName = user.nickname || ''
-      this.userAvatar = user.avatar || ''
-    }
-  }
-}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '../../element-variables.css';
 
-.container {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100%;
-  .header {
-    height: 60px;
-    line-height: 60px;
-    background: var(--color-primary);
-    color: #fff;
-    .userinfo {
-      text-align: right;
-      padding-right: 35px;
-      float: right;
-      .userinfo-inner {
-        cursor: pointer;
-        color: #fff;
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 20px;
-          margin: 10px 0px 10px 10px;
-          float: right;
+.dash-infobox {
+    margin-bottom: 20px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    .bg-success {
+        background: var(--color-success);
+    }
+    .bg-warning {
+        background: var(--color-warning);
+    }
+    .bg-danger {
+        background: var(--color-danger);
+    }
+    .bg-info {
+        background: var(--color-info);
+    }
+    .el-col {
+        padding: 15px 0;
+        border-radius: 4px;
+        .grid-content {
+            position: relative;
+            display: block;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+            border-radius: 4px;
+            min-height: 74px;
+            .inner {
+                padding: 10px;
+                h3,
+                p {
+                    color: var(--color-white);
+                    margin: 0;
+                }
+            }
+            .icon {
+                transition: all .3s linear;
+                position: absolute;
+                top: 0px;
+                right: 10px;
+                z-index: 0;
+                font-size: 56px;
+                color: rgba(0, 0, 0, .15);
+            }
+            .footer {
+                position: relative;
+                text-align: center;
+                padding: 3px 0;
+                color: rgba(255, 255, 255, .8);
+                display: block;
+                z-index: 10;
+                background: rgba(0, 0, 0, .1);
+                text-decoration: none;
+            }
         }
-      }
     }
-    .logo {
-      height: 60px;
-      font-size: 22px;
-      padding-left: 20px;
-      padding-right: 20px;
-      border-color: rgba(238, 241, 146, 0.3);
-      border-right: 1px solid;
-      img {
-        width: 40px;
-        float: left;
-        margin: 10px 10px 10px 18px;
-      }
-      .txt {
-        color: #fff;
-      }
+}
+
+.dash-chart {
+    margin-bottom: 20px;
+}
+
+.dash-card {
+    .time {
+        font-size: 13px;
+        color: #999;
     }
-    .logo {
-      width: 230px;
+
+    .bottom {
+        margin-top: 13px;
+        line-height: 12px;
     }
-    .logo-collapse {
-      width: 60px;
-      text-align: center;
-      font-size: 24px;
+
+    .button {
+        padding: 0;
+        float: right;
     }
-    .tools {
-      padding: 0px 23px;
-      width: 14px;
-      height: 60px;
-      line-height: 60px;
-      cursor: pointer;
+
+    .image {
+        width: 100%;
+        display: block;
     }
-  }
-  .main {
-    display: flex; // background: #324057;
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    overflow: hidden;
-    aside {
-      flex: 0 0 230px;
-      width: 230px; // position: absolute;
-      // top: 0px;
-      // bottom: 0px;
-      .el-menu {
-        height: 100%;
-      }
-      .collapsed {
-        width: 60px;
-        .item {
-          position: relative;
-        }
-        .submenu {
-          position: absolute;
-          top: 0;
-          left: 60px;
-          z-index: 99999;
-          height: auto;
-          display: none;
-        }
-      }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
     }
-    .menu-collapsed {
-      flex: 0 0 60px;
-      width: 60px;
+
+    .clearfix:after {
+        clear: both
     }
-    .menu-expanded {
-      flex: 0 0 230px;
-      width: 230px;
-    }
-    .content-container {
-      // background: #f1f2f7;
-      flex: 1; // position: absolute;
-      // right: 0px;
-      // top: 0px;
-      // bottom: 0px;
-      // left: 230px;
-      overflow-y: scroll;
-      padding: 20px;
-      .breadcrumb-container {
-        //margin-bottom: 15px;
-        .title {
-          width: 200px;
-          float: left;
-          color: #475669;
-        }
-        .breadcrumb-inner {
-          float: right;
-        }
-      }
-      .content-wrapper {
-        background-color: #fff;
-        box-sizing: border-box;
-      }
-    }
-  }
 }
 </style>
